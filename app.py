@@ -1,18 +1,20 @@
-from werkzeug.wrappers import Request, Response
+# coding=utf8
 from flask import Flask,render_template,url_for,request
+from flask_restful import Resource, Api
 import json
 import re
 import numpy as np
-import tensorflow as tf
+#import tensorflow as tf
 from keras_preprocessing.text import tokenizer_from_json
 from keras.preprocessing import sequence
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 
+"""
 physical_devices = tf.config.experimental.list_physical_devices('GPU') 
 for physical_device in physical_devices: 
     tf.config.experimental.set_memory_growth(physical_device, True)
-
+"""
 
 
 # Import CNN Model
@@ -28,9 +30,8 @@ with open('model/tokenizer.json') as f:
 def preprocess_text(sen):
     # Lowercase
     sentence = sen.lower()
-    
     # Remove punctuations and numbers
-    sentence = re.sub('[^a-zA-Zäöüß]', ' ', sentence)
+    sentence = re.sub('[^a-zA-ZÃ¤Ã¶Ã¼ÃŸ]', ' ', sentence)
 
     # Single character removal
     sentence = re.sub(r"\s+[a-zA-Z]\s+", ' ', sentence)
@@ -39,13 +40,13 @@ def preprocess_text(sen):
     sentence = re.sub(r'\s+', ' ', sentence)
     return sentence
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def home():
 	return render_template('home.html')
 
-@app.route('/predict',methods=['POST'])
+@application.route('/predict',methods=['POST'])
 
 def predict():
 
@@ -56,8 +57,8 @@ def predict():
         input_message = request.form['message']
         message = preprocess_text(str(input_message))
         if message.strip() == "":
-            result=["Please Enter a Headline"]
-        elif len(message.split()) < 1:
+            result="Please Enter a Headline"
+        if len(message.split()) < 1:
             result=["Please Enter more words"]
         else:
             my_input = [message]
@@ -79,5 +80,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    from werkzeug.serving import run_simple
-    run_simple('localhost', 9000, app)
+    app.run(host="0.0.0.0",port=8080,debug=True)
+    #app.run(port=5000,debug=True)
