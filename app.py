@@ -1,6 +1,5 @@
 # coding=utf8
 from flask import Flask,render_template,url_for,request
-from flask_restful import Resource, Api
 import json
 import re
 import numpy as np
