@@ -4,13 +4,13 @@ from flask_restful import Resource, Api
 import json
 import re
 import numpy as np
-#import tensorflow as tf
 from keras_preprocessing.text import tokenizer_from_json
 from keras.preprocessing import sequence
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 
 """
+#if some truble with tensorflow-gpu try that
 physical_devices = tf.config.experimental.list_physical_devices('GPU') 
 for physical_device in physical_devices: 
     tf.config.experimental.set_memory_growth(physical_device, True)
@@ -80,5 +80,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8080,debug=True)
-    #app.run(port=5000,debug=True)
+    #app.run(host="0.0.0.0",port=5000,debug=True)
+    app.run(port=5000,debug=True)
