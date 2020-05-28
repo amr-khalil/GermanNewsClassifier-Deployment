@@ -14,34 +14,7 @@
 	  
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <style type="text/css" media="screen">
-  
-      .progress-bar-holder{
-        width: 1100px;
-        background-color: #e9ecef;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        margin-bottom: 20px;
-      }
-
-      .progress-bar{
-        height: 30px;
-        color: #fff;
-        font-weight: bold;
-        text-align: right;
-        background: #007bff;
-        width: 0px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-      }
-      
-
-      progress-bar:hover{ background: #ba2d2d;}
-      .progress-bar-holder:hover{background-color: #595959;}
-      
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     
     <title>Predict</title>
   
